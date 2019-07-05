@@ -20,6 +20,14 @@
         <servlet-name>ProductList</servlet-name>
         <servlet-class>ProductList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductDetails</servlet-name>
+        <servlet-class>ProductDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartManager</servlet-name>
+        <servlet-class>CartManager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationServlet</servlet-name>
         <url-pattern>/RegistrationServlet</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>ProductList</servlet-name>
         <url-pattern>/ProductList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetails</servlet-name>
+        <url-pattern>/ProductDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartManager</servlet-name>
+        <url-pattern>/CartManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

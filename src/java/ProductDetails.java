@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -9,38 +8,58 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ProductList extends HttpServlet {
+public class ProductDetails extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String cat = request.getParameter("pc");
-        //fetch product-names from database belongs to 
-        //category cat
-        String sql = "select pcode,pname from products where pcat=?";
+        String code = request.getParameter("code");
+        String sql = "select * from products where pcode=?";
         try {
             Connection con = mypkg.Data.connect();
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, cat);
+            ps.setInt(1, Integer.parseInt(code));
             ResultSet rs = ps.executeQuery();
+            rs.next();
+            String pcode=rs.getString("pcode");
+            String pdesc=rs.getString("pdesc");
+            String pname=rs.getString("pname");
+            String pcat=rs.getString("pcat");
+            String price=rs.getString("price");
+            
+            
             out.println("<html>");
             out.println("<body>");
-            out.println("<h3>Click-Desired-Product-Name</h3>");
+            out.println("<h3>Product-Details</h3>");
             out.println("<hr>");
-            while (rs.next()) {
-                String s1 = rs.getString(1);//code
-                String s2 = rs.getString(2);//name
-                out.println("<a href=ProductDetails?code="+s1+">");
-                out.println(s2);
-                out.println("</a>");
-                out.println("<br>");
-            }
+            out.println("<table border=2>");
+            out.println("<tr>");
+            out.println("<td>PCode</td>");
+            out.println("<td>"+pcode+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td>PName</td>");
+            out.println("<td>"+pname+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td>PDesc</td>");
+            out.println("<td>"+pdesc+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td>PCat</td>");
+            out.println("<td>"+pcat+"</td>");
+            out.println("</tr>");
+            out.println("<tr>");
+            out.println("<td>Price</td>");
+            out.println("<td>"+price+"</td>");
+            out.println("</tr>");
+            out.println("</table>");
             out.println("<hr>");
-            out.println("<h5><a href=ShowCategories>Category-Page</a></h5>");
-            out.println("<h5><a href=customerdashboard.jsp>Customer-Home</a></h5>");
+            out.println("<a href=CartManager?code="+pcode+">Buy</a><br>");
+            out.println("<a href=ShowCategories>Category-Page</a><br>");
+            out.println("<a href=customerdashboard.jsp>Customer-Home</a><br>");
             out.println("</body>");
             out.println("</html>");
-
             con.close();
         } catch (Exception e) {
             out.println(e);
