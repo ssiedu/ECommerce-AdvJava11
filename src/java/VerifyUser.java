@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,22 @@ public class VerifyUser extends HttpServlet {
             ResultSet rs=ps.executeQuery();
             boolean success=rs.next();
             if(success){
+                //do user wants to save password?
+                String choice=request.getParameter("save");
+                if(choice!=null){
+                    //user wish to save password
+                    //we will save password using cookie
+                    Cookie c1=new Cookie("email",email);
+                    Cookie c2=new Cookie("password",password);
+                    c1.setMaxAge(60*60*24*7);
+                    c2.setMaxAge(60*60*24*7);
+                    response.addCookie(c1);
+                    response.addCookie(c2);
+                }
+                
+                
+                
+                
                 //out.println("Welcome Customer");
                 response.sendRedirect("customerdashboard.jsp");
             }else{
