@@ -7,11 +7,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class ShowCategories extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //reading userid from session
+        //step-1 (fetch the session ojbect)
+        HttpSession session=request.getSession();
+        //step-2 (read the data from session)
+        String uid=(String) session.getAttribute("userid");
+        if(uid==null){
+            response.sendRedirect("index.jsp");
+        }
+        
+        
+        
         PrintWriter out=response.getWriter();
         try{
         //fetch all the categories from database (product)
@@ -22,6 +35,7 @@ public class ShowCategories extends HttpServlet {
         //show them in form of hyperlink
         out.println("<html>");
         out.println("<body>");
+        out.println("<h3>Welcome "+uid+"</h3>");
         out.println("<h3>Click-Desired-Category</h3>");
         out.println("<hr>");
         while(rs.next()){

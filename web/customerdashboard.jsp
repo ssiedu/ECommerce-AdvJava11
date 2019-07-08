@@ -1,6 +1,13 @@
+<%
+  String uid=(String)session.getAttribute("userid");
+  if(uid==null){
+      response.sendRedirect("index.jsp");
+  }
+%>
+
 <html>
     <body>
-        <h3>Welcome-Customer</h3>
+        <h3>Welcome-<%=uid%></h3>
         <hr>
         <pre>
         <a href="ShowCategories">Explore-Store</a>
