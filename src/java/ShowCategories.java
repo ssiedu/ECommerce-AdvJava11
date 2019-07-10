@@ -3,6 +3,8 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +24,6 @@ public class ShowCategories extends HttpServlet {
         if(uid==null){
             response.sendRedirect("index.jsp");
         }
-        
-        
         
         PrintWriter out=response.getWriter();
         try{
@@ -45,7 +45,15 @@ public class ShowCategories extends HttpServlet {
             out.println("</a>");
             out.println("<br>");
         }
+        
+        HashSet<String> set=(HashSet<String>) session.getAttribute("cart");
+        int n=0;
+        if(set!=null){
+            n=set.size();
+        }
+        
         out.println("<hr>");
+        out.println("<h6>Items In Cart : "+n+" </h6>");
         out.println("<h5><a href=customerdashboard.jsp>Customer-Home</a></h5>");
         out.println("</body>");
         out.println("</html>");

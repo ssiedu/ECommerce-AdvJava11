@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,24 +6,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class CartManager extends HttpServlet {
+public class RemoveItem extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out=response.getWriter();
+        //read the item to be removed
         String code=request.getParameter("code");
-        //trying to fetch a collection from session
+        //fetch the session
         HttpSession session=request.getSession();
+        //fetch the collection from session
         HashSet<String> set=(HashSet<String>) session.getAttribute("cart");
-        if(set==null){
-            //if collection is not available in session
-            //create the new one
-            set=new HashSet<String>();
-        }
-        //add the product code to collection
-        set.add(code);
-        //store the collection in session
+        //remove the item from collection
+        set.remove(code);
+        //store the updated collection back to session
         session.setAttribute("cart", set);
-        response.sendRedirect("ShowCategories");
+        //redisplay the cart
+        response.sendRedirect("DisplayCart");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -11,8 +11,9 @@
         <hr>
         <pre>
         <a href="ShowCategories">Explore-Store</a>
+        <a href="ShowAllProducts.jsp">View-All-Products</a>
         <a href="">Search-Product</a>
-        <a href="">View-Cart</a>
+        <a href="DisplayCart">View-Cart</a>
         <a href="">Trace-Order</a>
         <a href="">Logout</a>
         </pre>
