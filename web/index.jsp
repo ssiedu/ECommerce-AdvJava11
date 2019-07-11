@@ -1,3 +1,5 @@
+<%@include file="info.jsp" %>
+
 <%
     String v1="",v2="";
     //step-1 (fetch all cookies)
@@ -20,8 +22,6 @@
 
 <html>
     <body>
-        <h3>ECommerce-App</h3>
-        <hr>
         <h5>Login-Form</h5>
         <form action="VerifyUser" method="get">
             <pre>
@@ -36,3 +36,4 @@
         <a href="registration.jsp">New-User</a>
     </body>
 </html>
+<%@include file="scheme.jsp" %>

@@ -1,3 +1,5 @@
+<%@include file="info.jsp" %>
+
 <%
   String uid=(String)session.getAttribute("userid");
   if(uid==null){
@@ -20,3 +22,4 @@
         <hr>
     </body>
 </html>
+<%@include  file="scheme.jsp" %>
